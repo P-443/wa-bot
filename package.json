@@ -8,7 +8,6 @@
     "build:tailwind": "tailwindcss -i ./src/styles/input.css -o ./public/styles/output.css --minify",
     "watch:ui": "node build.js --watch",
     "watch:tailwind": "tailwindcss -i ./src/styles/input.css -o ./public/styles/output.css --watch"
-  }
 },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
