@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "concurrently \"nodemon --exec ts-node src/index.ts\" \"npm run watch:tailwind\" \"npm run watch:ui\"",
+    "dev": "concurrently \"nodemon --loader ts-node/esm src/index.ts\" \"npm run watch:tailwind\" \"npm run watch:ui\"",
     "build": "tsc",
     "build:ui": "node build.js && npm run build:tailwind",
     "build:tailwind": "tailwindcss -i ./src/styles/input.css -o ./public/styles/output.css --minify",
