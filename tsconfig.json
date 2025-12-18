@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "ES6",
+    "module": "ESNext",
+    "jsx": "react-jsx",       // ← مهم جدًا
     "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "outDir": "./dist"
-  }
-} 
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
