@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "type": "module"
     "start": "node dist/index.js",
     "dev": "concurrently \"nodemon --loader ts-node/esm src/index.ts\" \"npm run watch:tailwind\" \"npm run watch:ui\"",
     "build": "tsc",
