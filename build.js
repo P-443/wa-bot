@@ -1,5 +1,11 @@
-const esbuild = require("esbuild");
-const path = require("path");
+// build.js
+import esbuild from "esbuild";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// تحويل import.meta.url لـ __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const watch = process.argv.includes("--watch");
 
@@ -22,11 +28,15 @@ async function build() {
 
   if (watch) {
     await context.watch();
-    console.log('watching for changes...');
+    console.log("watching for changes...");
   } else {
     await context.rebuild();
     context.dispose();
+    console.log("build completed");
   }
 }
 
-build().catch(() => process.exit(1));
+build().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
