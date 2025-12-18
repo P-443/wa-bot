@@ -1,24 +1,24 @@
 const esbuild = require("esbuild");
 const path = require("path");
 
-// استخدم هذه الطريقة بدلاً من إعادة تعريف __dirname
-const __dirname = path.resolve(); // إذا كنت تستخدم CommonJS فقط
-// إذا كنت تستخدم ESModules، استخدم:
+// لا تعيد تعريف __dirname إذا كانت موجودة مسبقًا
+// فقط استخدمها مباشرة
+const watch = process.argv.includes("--watch");
+
+// الطريقة الصحيحة للحصول على __dirname في ESModules:
 // import { fileURLToPath } from 'url';
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 
-const watch = process.argv.includes("--watch");
-
 async function build() {
   try {
     const context = await esbuild.context({
-      entryPoints: [path.resolve(__dirname, "frontend/src/App.tsx")],
+      entryPoints: [path.resolve("./frontend/src/App.tsx")],
       bundle: true,
       minify: !watch,
       sourcemap: watch,
       target: ["chrome58", "firefox57", "safari11"],
-      outfile: path.resolve(__dirname, "public/js/bundle.js"),
+      outfile: path.resolve("./public/js/bundle.js"),
       define: {
         "process.env.NODE_ENV": watch ? '"development"' : '"production"',
       },
