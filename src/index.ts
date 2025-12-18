@@ -1,3 +1,8 @@
+const express = require("express");
+const app = express();
+
+// باقي كودك هنا
+
 import express from "express";
 import cors from "cors";
 import path from "path";
