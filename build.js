@@ -1,7 +1,13 @@
 const esbuild = require("esbuild");
 const path = require("path");
 
-const __dirname = path.resolve();
+// استخدم هذه الطريقة بدلاً من إعادة تعريف __dirname
+const __dirname = path.resolve(); // إذا كنت تستخدم CommonJS فقط
+// إذا كنت تستخدم ESModules، استخدم:
+// import { fileURLToPath } from 'url';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
 const watch = process.argv.includes("--watch");
 
 async function build() {
