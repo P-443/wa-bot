@@ -1,10 +1,7 @@
-// build.js
 const esbuild = require("esbuild");
 const path = require("path");
 
-// تحديد المسار
 const __dirname = path.resolve();
-
 const watch = process.argv.includes("--watch");
 
 async function build() {
