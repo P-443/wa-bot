@@ -1,8 +1,3 @@
-const express = require("express");
-const app = express();
-
-// باقي كودك هنا
-
 import express from "express";
 import cors from "cors";
 import path from "path";
@@ -18,35 +13,24 @@ import { checkClientLoggedIn } from "./middleware/clientConnection";
 
 dotenv.config();
 
-const app = express();
+const app = express(); // تعريف واحد فقط
 const server = http.createServer(app);
+
+// استخدام middleware
+app.use(cors());
+app.use(express.json());
+app.use(routeLogger);
+
+// تعريف Routes
+app.use("/chats", checkClientLoggedIn, chatsRouter);
+app.use("/status", checkClientLoggedIn, statusRouter);
+app.use("/user", userRouter);
 
 // Initialize WebSocket
 initializeWebSocket(server);
 
-// Initialize WhatsApp Client
-WhatsAppClient.initialize();
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.static("public"));
-
-// Routes
-app.use("/api/chats", routeLogger, checkClientLoggedIn, chatsRouter);
-app.use("/api/user", routeLogger, checkClientLoggedIn, userRouter);
-app.use("/api/status", routeLogger, statusRouter);
-app.post("/api/logout", async (_, res) => {
-  await WhatsAppClient.logout();
-  res.sendStatus(200);
-});
-
-// Serve index.html for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
-
-const PORT = process.env.PORT || 5000;
+// بدء السيرفر
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
